@@ -40,7 +40,7 @@ module Sprockets
           if abs_digest_path.match(/\.(?:js|css)$/)
             mtime = File.mtime(abs_digest_path)
 
-            asset_body = File.read(abs_digest_path)
+            asset_body = File.read(abs_digest_path).encode('UTF-8', 'binary', invalid: :replace, undef: :replace, replace: '')
 
             # Find all hashes in the asset body with a leading '-'
             asset_body.gsub!(DIGEST_REGEX) do |match|
